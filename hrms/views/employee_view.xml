@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="employee_list_view_hrms" model="ir.ui.view">
+        <field name="name">employee.list.view.hrms</field>
+        <field name="model">employee.employee</field>
+        <field name="arch" type="xml">
+            <list string="Employee">
+
+                <field name="partner_id"/>
+                <field name="email"/>
+                <field name="phone_no"/>
+                <field name="position"/>
+                <field name="join_date"/>
+                <field name="status"/>
+                <field name="experience"/>
+                <field name="salary"/>
+                <field name="city"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="employee_form_view_hrms" model="ir.ui.view">
+        <field name="name">employee.form.view.hrms</field>
+        <field name="model">employee.employee</field>
+        <field name="arch" type="xml">
+            <form string="Employee">
+              <header>
+                   <!--   <button name="%(school.action_admission_school)d"-->
+<!--                            string="show addmission"-->
+<!--                            type="action"/>-->
+
+<!--                    <button name="object_to_action"-->
+<!--                            type="object"-->
+<!--                            string=" show standard"/>-->
+
+<!--                    <button name="stat_check"-->
+<!--                            type="object"-->
+<!--                            string="check done"/>-->
+
+                    <field name="status" widget="statusbar"
+                           statusbar_visible="active,inactive"
+                           options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="image" widget="image" options="{'size': [64, 64]}"/>
+                        <group>
+                            <field name="partner_id" required="True"/>
+                            <field name="email"/>
+                            <field name="phone_no"/>
+                            <field name="join_date"/>
+                            <field name="position"/>
+                            <div>
+                                <strong>Adress:</strong>
+                            </div>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="state_id" placeholder="State" class="o_address_state"
+                                       options="{'no_open': True, 'no_quick_create': True}"
+                                       context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                <div name="partner_address_country" class="d-flex justify-content-between">
+                                    <field name="country_id" placeholder="Country" class="o_address_country"
+                                           options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                </div>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="salary"/>
+                            <field name="experience"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="employee_search_view_hrms" model="ir.ui.view">
+        <field name="name">employee.search.view.hrms</field>
+        <field name="model">employee.employee</field>
+        <field name="arch" type="xml">
+            <search string="Employee">
+                 <field name="position"/>
+                 <field name="status"/>
+
+                <group>
+                    <filter name="salary" string="Salary" context="{'group by':'salary'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+     <record id="employee_kanban_view_hrms" model="ir.ui.view">
+        <field name="name">employee.kanban.view.hrms</field>
+        <field name="model">employee.employee</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <templates>
+                    <t t-name="card">
+                        <div class="col-0">
+                        <field name="image" widget="image" options="{'size': [64, 64]}"/>
+                        </div>
+                        <div class="row 0">
+                            <div class="col-6 ">
+<!--                                <field name="image" widget="image" options="{'size': [64, 64]}"/>-->
+                                <strong></strong>
+                            </div>
+                            <div class="col-6  ">
+                            </div>
+                            <div class="col-6  ">
+                                <strong>name:</strong>
+                            </div>
+                            <div class="col-6  ">
+                                <field name="partner_id"/>
+                            </div>
+                            <div class=" col-6">
+                                <strong>Position:</strong>
+                            </div>
+                            <div class=" col-6  ">
+                                <field name="position"/>
+                            </div>
+                            <div class=" col-6">
+                                <strong>phone number:</strong>
+                            </div>
+                            <div class=" col-6  ">
+                                <field name="phone_no"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>City :</strong>
+                            </div>
+                            <div class="col-6 ">
+                                <field name="city"/>
+                            </div>
+                            <div class="col-6">
+                                <strong>Status :</strong>
+                            </div>
+                            <div class="col-6 ">
+                                <field name="status"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+     <record id="action_employee_hrms" model="ir.actions.act_window">
+        <field name="name">Employee</field>
+        <field name="res_model">employee.employee</field>
+        <field name="view_mode">kanban,list,form,search</field>
+<!--       <field name="domain">[('state','!=', 'draft')]</field>-->
+        <field name="view_id" ref="employee_kanban_view_hrms"/>
+        <field name="search_view_id" ref="employee_search_view_hrms"/>
+    </record>
+
+<menuitem id="hr_main_menu" name="HRMS"/>
+    <menuitem id="employee_profile_menu" name="Employee" parent="hr_main_menu" action="action_employee_hrms" />
+
+
+
+</odoo>

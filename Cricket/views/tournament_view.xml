@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tournament_list_view_cricket" model="ir.ui.view">
+        <field name="name">tournament.list.view.cricket</field>
+        <field name="model">cricket.tournament</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="tournament"/>
+                <field name="season_year"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="status"/>
+                <field name="total_teams"/>
+                <field name="total_matches"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="tournament_form_view_cricket" model="ir.ui.view">
+        <field name="name">tournament.form.view.cricket</field>
+        <field name="model">cricket.tournament</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar" statusbar_visible="upcoming,live,finished"
+                           options="{'clickable': '1'}" readonly="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                         <button
+                                  name="view_matches"
+                                  type="object"
+                                 invisible="status in ['upcoming']"
+                                 class="oe_stat_button" icon="fa-star">
+                             <div class="o_stat_info">
+                                 <field name="total_matches" class="o_stat_value"/>
+                                 <span class="o_stat_text">Total Matches</span>
+                             </div>
+                        </button>
+                        <button name="view_teams"
+                                type="object"
+                                invisible="status in ['upcoming']"
+                                class="oe_stat_button" icon="oi-users">
+                             <div class="o_stat_info">
+                                 <field name="total_teams" class="o_stat_value"/>
+                                 <span class="o_stat_text">Total teams</span>
+                             </div>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="tournament" required="1"/>
+                        <field name="season_date" />
+                        <field name="season_year" />
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="tournament_search_view_cricket" model="ir.ui.view">
+        <field name="name">tournament.search.view.cricket</field>
+        <field name="model">cricket.tournament</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="tournament"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_tournament_cricket" model="ir.actions.act_window">
+        <field name="name">tournament</field>
+        <field name="res_model">cricket.tournament</field>
+        <field name="view_mode">list,form,search</field>
+        <field name="view_id" ref="tournament_list_view_cricket"/>
+        <field name="search_view_id" ref="tournament_search_view_cricket"/>
+    </record>
+
+
+    <menuitem id="crciket_tournament_menu" name="Tournament" parent="cricket_main_menu"
+              action="action_tournament_cricket"
+              sequence="2"/>
+
+
+</odoo>

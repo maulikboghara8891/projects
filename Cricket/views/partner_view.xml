@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+         <record id="player_list" model="ir.ui.view">
+            <field name="name">player.list</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='complete_name']" position="after">
+                    <field name="age"  optional="show"/>
+                    <field name="role"  optional="show"/>
+                    <field name="matches_played"  optional="show"/>
+                    <field name="total_runs"  optional="show"/>
+                    <field name="wickets"  optional="show"/>
+
+            </xpath>
+
+            </field>
+         </record>
+
+        <record id="player_form" model="ir.ui.view">
+            <field name="name">player.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+            <xpath expr="//notebook" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//group/group[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//group/group[2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//group/group[2]" position="after">
+                <group>
+                    <field name="age"/>
+                    <field name="role"/>
+                    <field name="matches_played" readonly="1"/>
+                    <field name="total_runs"/>
+                    <field name="wickets"/>
+                </group>
+            </xpath>
+
+            <xpath expr="//group" position="after">
+                <notebook>
+                    <page string="teams">
+                        <field name="team_ids" readonly="1">
+                            <list editable="bottom">
+                                <field name="tournament_id"/>
+                                <field name="name"/>
+                                <field name="total_matches"/>
+                                <field name="total_wins"/>
+
+                            </list>
+                        </field>
+                    </page>
+                </notebook>
+            </xpath>
+
+            <xpath expr="//field[@name='company_type']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//sheet/div[2]/div/div/div" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//sheet/div[2]/div/div/div[2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+           <div name="button_box" position="inside">
+                <button name="view_teams"
+                        type="object"
+                        invisible="not matches_played "
+                        class="oe_stat_button" icon="oi-users">
+                    <div class="o_stat_info">
+                        <field name="matches_played" class="o_stat_value"/>
+                        <span class="o_stat_text">Total Teams</span>
+                    </div>
+                </button>
+            </div>
+
+            </field>
+    </record>
+
+
+    <record id="action_player_base_cricket" model="ir.actions.act_window">
+        <field name="name">player</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="server_action_role_set_bowler" model="ir.actions.server">
+        <field name="name">Role set bowler</field>
+        <field name="model_id" ref="model_res_partner"/>
+        <field name="binding_model_id" ref="model_res_partner"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">action = records.role_set_bowler()</field>
+    </record>
+
+
+    <menuitem id="crciket_player_base_menu"
+              parent="add_main_menu"
+              name="Player"
+              action="action_player_base_cricket"
+              sequence="1"
+              groups = "Cricket.group_cricket_admin"
+              />
+
+</odoo>

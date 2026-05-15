@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="team_list_view_cricket" model="ir.ui.view">
+        <field name="name">team.list.view.cricket</field>
+        <field name="model">cricket.team</field>
+        <field name="arch" type="xml">
+            <list string="team">
+                <field name="tournament_id" />
+                <field name="team_id" />
+                <field name="group" optional="hide"/>
+                <field name="player_ids" widget="many2many_tags"/>
+                <field name="total_matches"/>
+                <field name="total_wins"/>
+                <field name="points" />
+                <field name="lost" optional="hide"/>
+                <field name="tie" optional="hide"/>
+                <field name="captain_id" optional="hide" />
+                <field name="coach_ids" widget="many2many_tags" optional="hide" />
+
+            </list>
+        </field>
+    </record>
+
+    <record id="team_form_view_cricket" model="ir.ui.view">
+        <field name="name">team.form.view.cricket</field>
+        <field name="model">cricket.team</field>
+        <field name="arch" type="xml">
+            <form string="team">
+                <sheet>
+                    <group>
+                        <field name="tournament_id"  required="1"/>
+                        <field name="team_id" required="1"/>
+                        <field name="group"  />
+                        <field name="player_ids" />
+                         <field name="captain_id"  domain="[('id','in',player_ids)]" options="{'no_create': True}"/>
+                        <field name="coach_ids" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="team_search_view_cricket" model="ir.ui.view">
+        <field name="name">team.search.view.cricket</field>
+        <field name="model">cricket.team</field>
+        <field name="arch" type="xml">
+            <search string="team">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+<!--    <record id="team_cricket_view_kanban" model="ir.ui.view">-->
+<!--        <field name="name">team.cricket.view.kanban</field>-->
+<!--        <field name="model">cricket.team</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <kanban class="o_kanban_mobile">-->
+<!--                <templates>-->
+<!--                    <t t-name="card">-->
+<!--                        <div>-->
+<!--                            <div class="o_kanban_record_top">-->
+<!--                                <center>-->
+<!--                                    <strong>-->
+<!--                                        <field name="tournament_id"/>-->
+<!--                                    </strong>-->
+<!--                                </center>-->
+<!--                                <table >-->
+<!--                                    <tr>-->
+<!--                                        <td><b>Team</b></td>-->
+<!--                                        <td>:<field name="team_id"/></td>-->
+<!--                                    </tr>-->
+
+<!--                                    <tr>-->
+<!--                                        <td><b>Captain</b></td>-->
+<!--                                        <td>:<field name="captain_id"/></td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td><b>Group</b></td>-->
+<!--                                        <td>:<field name="group"/></td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td><b>Players</b></td>-->
+<!--                                        <td>:<field name="player_ids" widget="many2many_tags"/></td>-->
+<!--                                    </tr>-->
+<!--                                    <tr>-->
+<!--                                        <td><b>Points</b></td>-->
+<!--                                        <td>:<field name="points"/></td>-->
+<!--                                    </tr>-->
+<!--                                </table>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                </templates>-->
+<!--            </kanban>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="action_team_cricket" model="ir.actions.act_window">
+        <field name="name">team</field>
+        <field name="res_model">cricket.team</field>
+        <field name="view_mode">list,form,search</field>
+        <field name="view_id" ref="team_list_view_cricket"/>
+        <field name="search_view_id" ref="team_search_view_cricket"/>
+    </record>
+
+    <menuitem id="crciket_team_main_menu" parent="cricket_main_menu" name="Team"  action="action_team_cricket" sequence="3"/>
+</odoo>

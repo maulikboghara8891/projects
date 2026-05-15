@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+Cricket.access_cricket_player,access_cricket_player,Cricket.model_cricket_player,,1,1,1,1
+Cricket.access_cricket_team,access_cricket_team,Cricket.model_cricket_team,,1,1,1,1
+Cricket.access_cricket_matches,access_cricket_matches,Cricket.model_cricket_matches,,1,1,1,1
+Cricket.access_cricket_venue,access_cricket_venue,Cricket.model_cricket_venue,,1,1,1,1
+Cricket.access_team_name,access_team_name,Cricket.model_team_name,,1,1,1,1
+Cricket.access_cricket_tournament,access_cricket_tournament,Cricket.model_cricket_tournament,,1,1,1,1
+Cricket.access_team_coach,access_team_coach,Cricket.model_team_coach,,1,1,1,1
+Cricket.access_team_points,access_team_points,Cricket.model_team_points,,1,1,1,1
+Cricket.access_match_runs_wizard,access_match_runs_wizard,Cricket.model_match_runs_wizard,,1,1,1,1
+Cricket.access_cricket_player,access_cricket_player,Cricket.model_cricket_player,,1,1,1,1
+Cricket.access_cricket_team_line,access_cricket_team_line,Cricket.model_cricket_team_line,,1,1,1,1
+Cricket.access_match_player_line,access_match_player_line,Cricket.model_match_player_line,base.group_user,1,1,1,1

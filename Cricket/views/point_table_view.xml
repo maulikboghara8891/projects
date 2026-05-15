@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="point_table_list_view_cricket" model="ir.ui.view">
+        <field name="name">point.table.list.view.cricket</field>
+        <field name="model">team.points</field>
+        <field name="arch" type="xml">
+            <list >
+                <field name="tournament_id"/>
+                <field name="team_id"/>
+<!--               <field name="group"/>-->
+                <field name="matches_played"/>
+                <field name="wins"/>
+                <field name="losses"/>
+                <field name="ties"/>
+                <field name="points"/>
+            </list>
+        </field>
+    </record>
+
+
+    <record id="point_table_view_kanban" model="ir.ui.view">
+        <field name="name">point.table.form.view.cricket</field>
+        <field name="model">team.points</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="tournament_id" class="o_kanban_small_column">
+                <templates>
+                    <t t-name="card">
+                        <div><center>
+                            <div class="o_kanban_record_top">
+                                <strong>
+                                    <field name="team_id"/>
+                                </strong>
+                            </div>
+                            </center>
+                            <table>
+                                <tr>
+                                    <td><b>Total Played</b></td>
+                                    <td>:<field name="matches_played"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Wins</b></td>
+                                    <td>:<field name="wins"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Loss</b></td>
+                                    <td>:<field name="losses"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Ties</b></td>
+                                    <td>:<field name="ties"/></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Points</b></td>
+                                    <td>:<field name="points"/></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
+     <record id="point_table_form_view_cricket" model="ir.ui.view">
+        <field name="name">point.table.form.view.cricket</field>
+        <field name="model">team.points</field>
+        <field name="arch" type="xml">
+            <form string="Team">
+                <header>
+                    <button name="%(Cricket.action_team_report)d"
+                            string="Print"
+                            type="action"
+                            class="btn-primary"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                         <button name="action_view_matches"
+                            type="object"
+                            string="Matches"
+                            class="oe_stat_button"
+                            invisible="not matches_played">
+                        <field name="matches_played" widget="statinfo"/>
+                         </button>
+
+                    </div>
+
+
+                    <group>
+                        <field name="tournament_id" />
+                        <field name="team_id" domain="[('tournament_id','=',tournament_id)]" />
+<!--                        <field name="group_name"/>-->
+                        <field name="matches_played"/>
+                        <field name="wins"/>
+                        <field name="losses"/>
+                        <field name="ties"/>
+                        <field name="points"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="point_table_search_view_cricket" model="ir.ui.view">
+        <field name="name">point.table.search.view.cricket</field>
+        <field name="model">team.points</field>
+        <field name="arch" type="xml">
+            <search>
+<!--                <field name="name"/>-->
+<!--                <field name="role"/>-->
+            </search>
+        </field>
+    </record>
+
+    <record id="action_point_table_cricket" model="ir.actions.act_window">
+        <field name="name"> Point Table</field>
+        <field name="res_model">team.points</field>
+        <field name="view_mode">kanban,list,form,search</field>
+        <field name="view_id" ref="point_table_view_kanban"/>
+        <field name="search_view_id" ref="point_table_search_view_cricket"/>
+    </record>
+
+
+    <menuitem id="point_table_menu"
+              parent="cricket_main_menu"
+              sequence="5"
+              name="point table"
+              action="action_point_table_cricket"
+             />
+
+
+
+
+</odoo>

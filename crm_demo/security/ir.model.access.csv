@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+crm_demo.access_assignment_rule,access_assignment_rule,crm_demo.model_assignment_rule,,1,1,1,1
+crm_demo.access_auto_assignment,access_auto_assignment,crm_demo.model_auto_assignment,,1,1,1,1
+crm_demo.access_timesheet_line,access_timesheet_line,crm_demo.model_timesheet_line,,1,1,1,1

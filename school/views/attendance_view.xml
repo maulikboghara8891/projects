@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="attendance_list_view_school" model="ir.ui.view">
+        <field name="name">attendance.list.view.school</field>
+        <field name="model">attendance.attendance</field>
+        <field name="arch" type="xml">
+            <list string="attendance">
+                    <field name="date" />
+                    <field name="standard_id"/>
+                    <field name="student_ids" widget="many2many"/>
+
+            </list>
+        </field>
+    </record>
+
+    <record id="attendance_form_view_school" model="ir.ui.view">
+        <field name="name">attendance.form.view.school</field>
+        <field name="model">attendance.attendance</field>
+        <field name="arch" type="xml">
+            <form string="attendance">
+                <sheet>
+                    <group>
+                        <field name="date" required="True"/>
+                        <field name="standard_id"/>
+                        <field name="student_ids">
+                            <list editable="bottom">
+                                <field name="student_id"  domain="[('standard_id', '=', parent.standard_id)]"/>
+                                <field name="standard_id"/>
+                                <field name="present" />
+                                <field name="absent" />
+                            </list>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+     <record id="action_ateendance_school" model="ir.actions.act_window">
+        <field name="name">attendance.standard.school</field>
+        <field name="res_model">attendance.attendance</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="attendance_list_view_school"/>
+<!--        <field name="search_view_id" ref="standard_search_view_school"/>-->
+    </record>
+
+        <menuitem id="student_attendance_menu" name="Attendance" parent="school_main_menu" action="action_ateendance_school" sequence="7"/>
+
+</odoo>

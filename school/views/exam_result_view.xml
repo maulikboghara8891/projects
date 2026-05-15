@@ -1,0 +1,105 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<odoo>-->
+<!--    <record id="exam_result_list_view_school" model="ir.ui.view">-->
+<!--        <field name="name">exam.result.list.view.school</field>-->
+<!--        <field name="model">exam.result</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <list string="exam result">-->
+<!--                <field name="partner_id"/>-->
+<!--                <field name="standard_id"/>-->
+<!--                <field name="exam_ids" widget="many2many_tags"/>-->
+
+<!--&lt;!&ndash;                <field name="stand_ids"/>&ndash;&gt;-->
+<!--            </list>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="exam_result_form_view_school" model="ir.ui.view">-->
+<!--        <field name="name">exam.result.form.view.school</field>-->
+<!--        <field name="model">exam.result</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form string="exam result">-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="partner_id" />-->
+<!--                        <field name="standard_id"   />-->
+<!--&lt;!&ndash;                        <field name="subject_id" domain="[('standard_id', '=', standard_id)]"/>&ndash;&gt;-->
+<!--                        <field name="exam_ids" string="exam ids" domain="[('partner_ids', 'in', partner_id),('standard_id', '=', standard_id)]">-->
+<!--                            <list editable="bottom">-->
+
+
+<!--                            </list>-->
+<!--                        </field>>-->
+
+
+<!--                    </group>-->
+<!--                    <group>-->
+<!--&lt;!&ndash;                        <field name="stand_ids"  optional="hide"/>&ndash;&gt;-->
+<!--                    </group>-->
+
+
+
+
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--        <record id="exam_result_search_view_school" model="ir.ui.view">-->
+<!--        <field name="name">exam.result.search.view.school</field>-->
+<!--        <field name="model">exam.result</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <search string="exam result">-->
+<!--&lt;!&ndash;                <field name="st_class" />&ndash;&gt;-->
+<!--&lt;!&ndash;                <field name="stand_ids" />&ndash;&gt;-->
+
+
+<!--            </search>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="exam_result_kanban_view_school" model="ir.ui.view">-->
+<!--        <field name="name">exam.result.kanban.view.school</field>-->
+<!--        <field name="model">exam.result</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <kanban class="o_kanban_mobile">-->
+<!--                    <templates>-->
+<!--                        <t t-name="card" >-->
+<!--                            <div class="row 0">-->
+<!--                                <div class="col-6  ">-->
+<!--                                    <strong>class:</strong>-->
+<!--                                </div>-->
+<!--                                <div class="col-6  text-end">-->
+<!--&lt;!&ndash;                                    <field   name="st_class"/>&ndash;&gt;-->
+
+<!--                                </div>-->
+<!--                                <div class="col-6  ">-->
+<!--                                    <strong>students:</strong>-->
+<!--                                </div>-->
+<!--                                <div class="col-6  text-end">-->
+<!--&lt;!&ndash;                                    <field name="stand_ids"/>&ndash;&gt;-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                    </templates>-->
+<!--            </kanban>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+
+<!--    <record id="action_exam_result_school" model="ir.actions.act_window">-->
+<!--        <field name="name">action.exam.result.school</field>-->
+<!--        <field name="res_model">exam.result</field>-->
+<!--        <field name="view_mode">list,form,search,kanban</field>-->
+<!--        <field name="view_id" ref="exam_result_list_view_school"/>-->
+<!--        <field name="search_view_id" ref="exam_result_search_view_school"/>-->
+<!--    </record>-->
+
+
+<!--    <menuitem id="school_exam_result_menu" name="result" parent="school_exam_menu" action="action_exam_result_school" sequence="2"/>-->
+
+
+
+
+<!--</odoo>-->

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="timesheet_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <div class="page">
+
+                    <center>
+                        <h2>Timesheet Report</h2>
+
+                    </center>
+                    <div>
+                        <strong>Sale Order :</strong>
+                        <span t-field="doc.name"/>
+                    </div>
+                    <table border="1" align="center">
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Parent Task</th>
+                                <th>Allocation Source</th>
+                                <th>Source Allocated</th>
+                                <th>Allocated</th>
+                                <th>Total Used</th>
+                                <th>Last Month</th>
+                                <th>Period Used</th>
+                                <th>Remaining</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr t-foreach="doc.timesheet_line_ids" t-as="line">
+                                <td>
+                                    <span t-field="line.task_id"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.parent_task_id"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.allocation_source"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.source_allocated_hours"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.allocated_hours"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.total_used_hours"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.total_used_last_month"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.used_hours_period"/>
+                                </td>
+                                <td>
+                                    <span t-field="line.remaining_hours"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">
+                                    <strong>Total</strong>
+                                </td>
+                                <td>
+                                    <span t-esc="sum(doc.timesheet_line_ids.mapped('source_allocated_hours'))"/>
+                                </td>
+                                <td>
+                                    <span t-esc="sum(doc.timesheet_line_ids.mapped('allocated_hours'))"/>
+                                </td>
+                                <td>
+                                    <span t-esc="sum(doc.timesheet_line_ids.mapped('total_used_hours'))"/>
+                                </td>
+                                <td>
+                                    <span t-esc="sum(doc.timesheet_line_ids.mapped('total_used_last_month'))"/>
+                                </td>
+                                <td>
+                                    <span t-esc="sum(doc.timesheet_line_ids.mapped('used_hours_period'))"/>
+                                </td>
+                                <td>
+                                    <span t-esc="sum(doc.timesheet_line_ids.mapped('remaining_hours'))"/>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_timesheet_report" model="ir.actions.report">
+        <field name="name">Timesheet Report</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">crm_demo.timesheet_report_template</field>
+        <field name="binding_model_id" ref="model_sale_order"/>
+    </record>
+
+</odoo>
+

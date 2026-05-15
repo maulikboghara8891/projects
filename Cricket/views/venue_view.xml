@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="venue_list_view_cricket" model="ir.ui.view">
+        <field name="name">venue.list.view.cricket</field>
+        <field name="model">cricket.venue</field>
+        <field name="arch" type="xml">
+            <list >
+                <field name="name" required="1"/>
+                <field name="street"/>
+                <field name="city"/>
+                <field name="state"/>
+                <field name="country"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="venue_form_view_cricket" model="ir.ui.view">
+        <field name="name">venue.form.view.cricket</field>
+        <field name="model">cricket.venue</field>
+        <field name="arch" type="xml">
+            <form >
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+                        <field name="street"/>
+                        <field name="city"/>
+                        <field name="state"/>
+                        <field name="country"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="venue_search_view_cricket" model="ir.ui.view">
+        <field name="name">venue.search.view.cricket</field>
+        <field name="model">cricket.venue</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+
+            </search>
+        </field>
+    </record>
+
+<!--    <record id="player_kanban_view_school" model="ir.ui.view">-->
+<!--        <field name="name">standard.kanban.view.school</field>-->
+<!--        <field name="model">standard.standard</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <kanban class="o_kanban_mobile">-->
+<!--                <templates>-->
+<!--                    <t t-name="card">-->
+<!--                        <div class="row 0">-->
+<!--                            <div class="col-6  ">-->
+<!--                                <strong>class:</strong>-->
+<!--                            </div>-->
+<!--                            <div class="col-6  text-end">-->
+<!--                                <field name="st_class"/>-->
+
+<!--                            </div>-->
+<!--                            <div class="col-6  ">-->
+<!--                                <strong>students:</strong>-->
+<!--                            </div>-->
+<!--                            <div class="col-6  text-end">-->
+<!--                                <field name="student_ids"/>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </t>-->
+<!--                </templates>-->
+<!--            </kanban>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+    <record id="action_venue_cricket" model="ir.actions.act_window">
+        <field name="name">venue</field>
+        <field name="res_model">cricket.venue</field>
+        <field name="view_mode">list,form,search</field>
+        <field name="view_id" ref="venue_list_view_cricket"/>
+        <field name="search_view_id" ref="venue_search_view_cricket"/>
+    </record>
+
+
+
+    <menuitem id="crciket_venue_menu" parent="add_main_menu" name="Venue" action="action_venue_cricket"
+              sequence="4"/>
+
+
+</odoo>

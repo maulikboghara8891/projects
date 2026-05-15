@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="coach_list_view_cricket" model="ir.ui.view">
+        <field name="name">coach.list.view.cricket</field>
+        <field name="model">team.coach</field>
+        <field name="arch" type="xml">
+            <list string="player">
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="age"/>
+                <field name="experience"/>
+                <field name="specialization"/>
+                <field name="team_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="coach_form_view_cricket" model="ir.ui.view">
+        <field name="name">coach.form.view.cricket</field>
+        <field name="model">team.coach</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="phone"/>
+                        <field name="age"/>
+                        <field name="experience"  />
+                        <field name="specialization"/>
+
+                    </group>
+                    <notebook>
+                        <page string="Teams">
+                            <field name="team_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="coach_search_view_cricket" model="ir.ui.view">
+        <field name="name">coach.search.view.cricket</field>
+        <field name="model">team.coach</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="specialization"/>
+            </search>
+        </field>
+    </record>
+
+    <!--    <record id="player_kanban_view_school" model="ir.ui.view">-->
+    <!--        <field name="name">standard.kanban.view.school</field>-->
+    <!--        <field name="model">standard.standard</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <kanban class="o_kanban_mobile">-->
+    <!--                <templates>-->
+    <!--                    <t t-name="card">-->
+    <!--                        <div class="row 0">-->
+    <!--                            <div class="col-6  ">-->
+    <!--                                <strong>class:</strong>-->
+    <!--                            </div>-->
+    <!--                            <div class="col-6  text-end">-->
+    <!--                                <field name="st_class"/>-->
+
+    <!--                            </div>-->
+    <!--                            <div class="col-6  ">-->
+    <!--                                <strong>students:</strong>-->
+    <!--                            </div>-->
+    <!--                            <div class="col-6  text-end">-->
+    <!--                                <field name="student_ids"/>-->
+
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                    </t>-->
+    <!--                </templates>-->
+    <!--            </kanban>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+
+    <record id="action_coach_cricket" model="ir.actions.act_window">
+        <field name="name">Coach</field>
+        <field name="res_model">team.coach</field>
+        <field name="view_mode">list,form,search</field>
+        <field name="view_id" ref="coach_list_view_cricket"/>
+        <field name="search_view_id" ref="coach_search_view_cricket"/>
+    </record>
+
+
+    <menuitem id="add_main_menu" parent="cricket_main_menu" name="Add" sequence="1">
+        <menuitem id="coach_team_menu"
+                  name="coach"
+                  action="action_coach_cricket"
+                  sequence="2"/>
+    </menuitem>
+
+</odoo>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_cricket_team">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="team">
+                <div class="page">
+                    <center>
+                        <h1>Team Report</h1>
+                        <h2>
+                            Tournament:
+                            <span t-field="team.tournament_id.tournament"/>
+                            <br/>
+                            Team:
+                            <span t-esc="team.team_id.name"/>
+                        </h2>
+                    </center>
+                    <table border="1" width="50%" align="center">
+                        <tr>
+                            <td>
+                                <b>Total Played</b>
+                            </td>
+                            <td>
+                                <span t-esc="team.matches_played"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Wins</b>
+                            </td>
+                            <td>
+                                <span t-esc="team.wins"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Loss</b>
+                            </td>
+                            <td>
+                                <span t-esc="team.losses"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Ties</b>
+                            </td>
+                            <td>
+                                <span t-esc="team.ties"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Points</b>
+                            </td>
+                            <td>
+                                <span t-esc="team.points"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_team_report" model="ir.actions.report">
+        <field name="name">Team Report</field>
+        <field name="model">team.points</field>
+        <field name="report_type">qweb-pdf</field>
+         <!-- REQUIRED -->
+    <field name="report_name">cricket.team_point_report_template</field>
+    <field name="report_file">cricket.team_point_report_template</field>
+
+    <!-- OPTIONAL but correct format -->
+    <field name="print_report_name">'%s' % (object.team_id.name)</field>
+<!--        <field name="print_report_name">object.team_id.name</field>-->
+    </record>
+
+</odoo>

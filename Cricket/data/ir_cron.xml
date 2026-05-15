@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_update_status_match" model="ir.cron">
+        <field name="name">Status update</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="model_cricket_matches"/>
+        <field name="code">model.update_status()</field>
+        <field name="state">code</field>
+    </record>
+</odoo>

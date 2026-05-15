@@ -1,0 +1,30 @@
+{
+    "name": "School  management",
+    'version': '19.0.1.0.0',
+    'category': 'Website',
+    'summary': 'School manage',
+    'author': 'maulik',
+    'license': 'LGPL-3',
+    'description': """ school""",
+    'website': 'https://www.odoo.com',
+
+    "depends": [
+        'base','sale',
+    ],
+    "data": [
+        "security/ir.model.access.csv",
+        "security/security_rule.xml",
+        "views/student_view.xml",
+        "views/teacher_view.xml",
+        "views/subject_view.xml",
+        "views/standard_view.xml",
+        "views/admission_view.xml",
+        "views/hobby_view.xml",
+        "views/exam_view.xml",
+        "views/attendance_view.xml",
+        "views/sale_view.xml",
+    ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+}

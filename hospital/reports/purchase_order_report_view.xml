@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_purchasequotation_document" inherit_id="purchase.report_purchasequotation_document">
+        <xpath expr="//th[@name='th_description']" position="after">
+            <th>unit price</th>
+        </xpath>
+
+        <xpath expr="//td[@id='product']" position="after">
+            <td id="price_unit">
+                <span t-field="order_line.price_unit"/>
+            </td>
+        </xpath>
+    </template>
+
+
+
+</odoo>

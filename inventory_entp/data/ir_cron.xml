@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ir_cron_create_handling_charges" model="ir.cron">
+        <field name="name">Create Handling Charges Journal Entry</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="model_id" ref="stock.model_stock_picking"/>
+        <field name="code">model.handling_charges_entry()</field>
+        <field name="state">code</field>
+    </record>
+</odoo>

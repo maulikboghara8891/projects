@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="assignment_rule_list_crm_demo" model="ir.ui.view">
+        <field name="name">assignment.rule.list.crm.demo</field>
+        <field name="model">assignment.rule</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="assign_role"/>
+                <field name="country_id"  readonly ="assign_role not in ['country']"/>
+                <field name="revenue_val" readonly="assign_role not in ['expected_revenue']"/>
+                <field name="score"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="assignment_rule_form_crm_demo" model="ir.ui.view">
+        <field name="name">assignment.rule.form.crm.demo</field>
+        <field name="model">assignment.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="assign_role"/>
+                        <field name="country_id" invisible="assign_role not in ['country']"/>
+                        <field name="revenue_val" invisible="assign_role not in ['expected_revenue']"/>
+                        <field name="score"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_assignment_rule" model="ir.actions.act_window">
+        <field name="name">assignment rule</field>
+        <field name="res_model">assignment.rule</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem
+            id="crm_assign_rule"
+            name="Assignment Rule"
+            parent="crm.crm_menu_config"
+            action="crm_demo.action_assignment_rule"
+            sequence="6"
+    />
+
+</odoo>

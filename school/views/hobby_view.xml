@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hobby_list_view_school" model="ir.ui.view">
+        <field name="name">hobby.list.view.school</field>
+        <field name="model">hobby.hobby</field>
+        <field name="arch" type="xml">
+            <list string="Hobby">
+                <field name="name"/>
+                <field name="student_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="hobby_form_view_school" model="ir.ui.view">
+        <field name="name">hobby.form.view.school</field>
+        <field name="model">hobby.hobby</field>
+        <field name="arch" type="xml">
+            <form string="Hobby">
+                <sheet>
+                    <group>
+                        <field name="name" required="True"/>
+                        <field name="student_ids" readonly="1"/>
+
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hobby_search_view_school" model="ir.ui.view">
+        <field name="name">hobby.search.view.school</field>
+        <field name="model">hobby.hobby</field>
+        <field name="arch" type="xml">
+            <search string="Hobby">
+                <field name="name"/>
+
+
+            </search>
+        </field>
+    </record>
+
+    <record id="hobby_kanban_view_school" model="ir.ui.view">
+        <field name="name">hobby.kanban.view.school</field>
+        <field name="model">hobby.hobby</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <templates>
+                    <t t-name="card">
+                        <div class="row 0">
+                            <div class="col-6  ">
+                                <strong>Hobby:</strong>
+                            </div>
+                            <div class="col-6  text-end">
+                                <field name="name"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="action_hobby_school" model="ir.actions.act_window">
+        <field name="name">action.hobby.school</field>
+        <field name="res_model">hobby.hobby</field>
+        <field name="view_mode">list,form,search,kanban</field>
+        <field name="view_id" ref="hobby_list_view_school"/>
+        <field name="search_view_id" ref="hobby_search_view_school"/>
+    </record>
+
+
+    <menuitem id="school_hobby_menu" name="Hobby" parent="school_main_menu" action="action_hobby_school" sequence="5"/>
+
+
+</odoo>

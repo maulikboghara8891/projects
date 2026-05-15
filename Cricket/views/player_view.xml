@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="player_list_view_cricket" model="ir.ui.view">
+        <field name="name">player.list.view.cricket</field>
+        <field name="model">cricket.player</field>
+        <field name="arch" type="xml">
+            <list string="player">
+                <field name="name"/>
+                <field name="age"/>
+                <field name="role"/>
+                <field name="matches_played"/>
+                <field name="runs"/>
+                <field name="wickets"/>
+                <field name="team_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="player_form_view_cricket" model="ir.ui.view">
+        <field name="name">player.form.view.cricket</field>
+        <field name="model">cricket.player</field>
+        <field name="arch" type="xml">
+            <form string="player">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="1"/>
+                            <field name="age"/>
+                            <field name="role" required="1"/>
+                            <field name="matches_played"/>
+                            <field name="runs"/>
+                            <field name="wickets"/>
+                        </group>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="player_search_view_cricket" model="ir.ui.view">
+        <field name="name">player.search.view.cricket</field>
+        <field name="model">cricket.player</field>
+        <field name="arch" type="xml">
+            <search string="player">
+                <field name="name"/>
+                <field name="role"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_player_cricket" model="ir.actions.act_window">
+        <field name="name">player</field>
+        <field name="res_model">cricket.player</field>
+        <field name="view_mode">list,form,search</field>
+        <field name="view_id" ref="player_list_view_cricket"/>
+        <field name="search_view_id" ref="player_search_view_cricket"/>
+    </record>
+
+    <record id="server_action_role_change" model="ir.actions.server">
+        <field name="name">Role set bowler</field>
+        <field name="model_id" ref="model_cricket_player"/>
+        <field name="binding_model_id" ref="model_cricket_player"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">action = records.role_change()</field>
+    </record>
+
+    <menuitem id="cricket_main_menu" name="Cricket"/>
+<!--    <menuitem id="crciket_player_menu" parent="cricket_main_menu" name="Player" action="action_player_cricket"-->
+<!--    />-->
+
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="stock_picking_view_form" model="ir.ui.view">
+        <field name="name">stock.picking.view.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_detailed_operations']" position="after">
+                <button name='view_journal_enty'
+                        string="Entry"
+                        type="object"
+                        invisible="not charges_created"
+                        class="oe_stat_button" icon="fa-star">
+                </button>
+            </xpath>
+
+            <xpath expr="//field[@name='picking_type_id']" position="after">
+                <field name="currency_id" invisible="1"/>
+                <field name="handling_charges" readonly="state in ('done', 'cancel')" invisible="picking_type_code not in ('outgoing', 'internal')"/>
+                <field name="charges_created" readonly="1" invisible="picking_type_code not in ('outgoing', 'internal')"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

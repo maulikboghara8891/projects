@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="user_form" model="ir.ui.view">
+        <field name="name">user.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//notebook/page/group" position="after">
+                <group string="Test">
+
+                </group>
+            </xpath>
+        </field>
+
+    </record>
+
+
+<!--    <record id="setting_form" model="ir.ui.view">-->
+<!--        <field name="name">setting.form</field>-->
+<!--        <field name="model">res.config.settings</field>-->
+<!--        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//div[@id='languages']" position="after">-->
+<!--                <block title="User" name="languages_setting_container">-->
+<!--                </block>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="action_base_user" model="ir.actions.act_window">
+        <field name="name">user</field>
+        <field name="res_model">res.users</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+
+
+<!--    <menuitem id="user_base_menu" parent="cricket_main_menu" name="User" action="action_base_user" />-->
+
+</odoo>

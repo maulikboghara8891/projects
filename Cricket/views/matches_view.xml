@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="matches_list_view_cricket" model="ir.ui.view">
+        <field name="name">matches.list.view.cricket</field>
+        <field name="model">cricket.matches</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="tournament_id"/>
+                <field name="name" />
+                <field name="match_date"/>
+                <field name="status" widget="badge"
+                       decoration-success="status == 'finished'"
+                       decoration-danger="status == 'live'"
+                       decoration-warning="status == 'upcoming'"/>
+                <field name="win"/>
+                <field name="team_a_runs" optional="hide"/>
+                <field name="team_b_runs" optional="hide"/>
+                <field name="team_a_wickets" optional="hide"/>
+                <field name="team_b_wickets" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="matches_form_view_cricket" model="ir.ui.view">
+        <field name="name">matches.form.view.cricket</field>
+        <field name="model">cricket.matches</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                     <button name="status_live"
+                            type="object"
+                            string="live"
+                            invisible="status in ['finished','live']"
+                    />
+                    <button
+                            name="add_run"
+                            type="object"
+                            string="add run"
+                            invisible="status in ['upcoming','finished'] "
+
+                    />
+                    <button name="status_finis"
+                            type="object"
+                            string="completed"
+                            invisible="status in ['upcoming','finished']"
+                    />
+                    <field name="status" widget="statusbar" statusbar_visible="upcoming,live,finished"
+                           options="{'clickable': '1'}" readonly="1"/>
+                </header>
+
+                <sheet>
+                    <widget name="web_ribbon" title="Live" bg_color="text-bg-danger" invisible="status != 'live' "/>
+                    <widget name="web_ribbon" title="Completed" bg_color="text-bg-success" invisible="status != 'finished' "/>
+                    <widget name="web_ribbon" title="Scheduled" bg_color="text-bg-secondary" invisible="status != 'upcoming' "/>
+
+                    <group>
+
+                        <group>
+
+                            <field name="name"/>
+                            <field name="tournament_id"  readonly="status != 'upcoming' " />
+                            <field name="team_a_id" domain="[('tournament_id','=',tournament_id),('id', '!=', team_b_id)]" readonly="status != 'upcoming' " required="1"/>
+                            <field name="team_b_id" domain="[('tournament_id','=',tournament_id),('id', '!=', team_a_id)]" readonly="status != 'upcoming' " required="1"/>
+                            <field name="match_date" readonly="status != 'upcoming' " required="1"/>
+                        </group>
+                        <group >
+                            <field name="overs" readonly="status != 'upcoming' "/>
+                            <field name="toss_winer_id" domain="[('id', '=', [team_a_id,team_b_id])]" readonly="status != 'upcoming' "/>
+                            <field name="toss_decision" readonly="status != 'upcoming' "/>
+                            <field name="stadium_id" readonly="status != 'upcoming' "/>
+                            <div>
+                                <strong>Adress:</strong>
+                            </div>
+                            <div class="o_address_format">
+
+                                <field name="street" placeholder="Street..."  class="o_address_street" readonly="status != 'upcoming' "/>
+                                <field name="city" placeholder="City" readonly="status != 'upcoming' " class="o_address_city"/>
+                                <field name="state" placeholder="State" readonly="status != 'upcoming' " class="o_address_state"/>
+                                <field name="country" placeholder="Country" readonly="status != 'upcoming' " class="o_address_country"/>
+                            </div>
+                            </group>
+                        <notebook>
+<!--                            <page string="add team-a runs">-->
+<!--                                <group>-->
+<!--                                    <field name="team_a_id"/>-->
+<!--                                    <field name="team_a_line"  >-->
+<!--                                        <list editable="bottom" >-->
+<!--                                            <field name="team_id"   readonly="1"/>-->
+<!--                                            <field name="player_id" readonly="1"/>-->
+<!--                                            <field name="runs"/>-->
+<!--                                        </list>-->
+<!--                                    </field>-->
+<!--                                    <field name="team_a_extra_runs"/>-->
+<!--                                    <field name="team_a_runs"/>-->
+<!--                                </group>-->
+
+<!--                            </page>-->
+<!--                            <page string="add team-B runs">-->
+<!--                                <group>-->
+<!--                                    <field name="team_b_id" />-->
+<!--                                    <field name="team_b_line"  >-->
+<!--                                        <list editable="bottom" >-->
+<!--                                            <field name="team_id" readonly="1"/>-->
+<!--                                            <field name="player_id"  readonly="1"/>-->
+<!--                                            <field name="runs"/>-->
+<!--                                        </list>-->
+<!--                                    </field>-->
+<!--                                    <field name="team_b_extra_runs"/>-->
+<!--                                    <field name="team_b_runs"/>-->
+<!--                                </group>-->
+
+<!--                            </page>-->
+                            <page string="Score">
+                                <group>
+                                    <field name="team_a_runs"  readonly="1"  />
+                                    <field name="team_b_runs"  readonly="1" />
+                                    <field name="team_a_wickets"  readonly="1"  />
+                                    <field name="team_b_wickets"  readonly="1" />
+                                </group>
+                            </page>
+                            <page string="Winer">
+                                <group>
+                                    <field name="win" readonly="1" />
+
+                                </group>
+                            </page>
+
+                        </notebook>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+    <record id="matches_search_view_cricket" model="ir.ui.view">
+        <field name="name">matches.search.view.cricket</field>
+        <field name="model">cricket.matches</field>
+        <field name="arch" type="xml">
+            <search >
+                 <filter name="Upcoming" domain="[('status', '=', 'upcoming')]"/>
+                 <filter name="Live" domain="[('status', '=', 'live')]"/>
+                 <filter name="Finished" domain="[('status', '=', 'finished')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="matches_kanban_view_cricket" model="ir.ui.view">
+        <field name="name">matches.kanban.view.cricket</field>
+        <field name="model">cricket.matches</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="status" class="o_kanban_small_column">
+                <templates>
+                    <t t-name="card">
+                        <div>
+                            <div class="o_kanban_record_top">
+                                <strong>
+                                    <field name="name"/>  ( <field name="tournament_id"/> )
+                                </strong>
+                            </div>
+                            <div>
+                                date:
+                                <field name="match_date"/>
+                            </div>
+                            <div>
+                                Winner:
+                                <field name="win"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
+    <record id="action_matches_cricket" model="ir.actions.act_window">
+        <field name="name">matches</field>
+        <field name="res_model">cricket.matches</field>
+        <field name="view_mode">kanban,list,form,search</field>
+        <field name="view_id" ref="matches_kanban_view_cricket"/>
+        <field name="search_view_id" ref="matches_search_view_cricket"/>
+    </record>
+
+    
+
+
+    <menuitem id="crciket_matches_menu" parent="cricket_main_menu" name="Matches" action="action_matches_cricket"
+              sequence="4"/>
+
+
+</odoo>

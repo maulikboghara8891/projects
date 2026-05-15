@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="web.ListView" t-inherit-mode="extension">
+        <xpath expr="//button" position="after">
+            <button t-if="props.resModel === 'sale.order'"
+                    type="button"
+                    class="btn btn-secondary">
+                 Custom
+            </button>
+        </xpath>
+    </t>
+    <t t-inherit="web.FormView" t-inherit-mode="extension">
+        <xpath expr="//t/div/div/Layout/t/button" position="after">
+            <button t-if="props.resModel === 'sale.order'"
+                    type="button"
+                    class="btn btn-secondary">
+                 add
+            </button>
+        </xpath>
+    </t>
+</templates>

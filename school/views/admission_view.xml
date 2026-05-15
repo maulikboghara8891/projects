@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="admission_list_view_school" model="ir.ui.view">
+        <field name="name">admission.list.view.school</field>
+        <field name="model">school.admission</field>
+        <field name="arch" type="xml">
+            <list string="admission">
+
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="dob"/>
+                <field name="age"/>
+                <field name="city"/>
+                <field name="class_id"/>
+                <field name="state"/>
+                <field name="city"/>
+                <field name="street"/>
+                <field name="street2"/>
+                <field name="zip"/>
+                <field name="country_id"/>
+                <field name="state_id"/>
+
+
+            </list>
+        </field>
+    </record>
+
+    <record id="admission_form_view_school" model="ir.ui.view">
+        <field name="name">admission.form.view.school</field>
+        <field name="model">school.admission</field>
+        <field name="arch" type="xml">
+            <form string="student">
+                <header>
+                     <button name="create_rec"
+                            type="object"
+                            string="approve"
+                            invisible="state  in ['approved','rejected']"/>
+
+
+                    <button name="stat_reject"
+                            type="object"
+                            string="reject"
+                            invisible="state  in ['approved','rejected']"
+                    />
+<!--                    <button name="rec_update"-->
+<!--                            type="object"-->
+<!--                            string="update"-->
+<!--                            invisible="state  not in ['approved']"-->
+<!--                    />-->
+
+
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,inquiry,rejected,approved"
+                           options="{'clickable': '1'}"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" required="True"/>
+                            <field name="email"/>
+                            <field name="phone"/>
+                            <field name="dob"/>
+                            <field name="age"/>
+                            <div>
+                                <strong>Adress:</strong>
+                            </div>
+                            <div class="o_address_format">
+
+                                <field name="street" placeholder="Street..." class="o_address_street"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="state_id" placeholder="State" class="o_address_state"
+                                       options="{'no_open': True, 'no_quick_create': True}"
+                                       context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                <div name="partner_address_country" class="d-flex justify-content-between">
+                                    <field name="country_id" placeholder="Country" class="o_address_country"
+                                           options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"/>
+                                </div>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="class_id"/>
+                            <field name="fees"/>
+                            <button name="fees_pay"
+                            type="object"
+                            string="pay"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_admission_school" model="ir.actions.act_window">
+        <field name="name">admission</field>
+        <field name="res_model">school.admission</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="admission_list_view_school"/>
+
+    </record>
+
+
+    <menuitem id="school_main_menu" name="School"/>
+    <menuitem id="admission_profile_menu" name="Admission" parent="school_main_menu" action="action_admission_school"
+              sequence="1"/>
+
+
+</odoo>

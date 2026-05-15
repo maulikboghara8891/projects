@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="subject_list_view_school" model="ir.ui.view">
+        <field name="name">subject.list.view.school</field>
+        <field name="model">subject.subject</field>
+        <field name="arch" type="xml">
+            <list string="Subject">
+                <field name="name"/>
+<!--                <field name="mark"/>-->
+                <field name="sub_state"/>
+                <field name="standard_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="subject_form_view_school" model="ir.ui.view">
+        <field name="name">subject.form.view.school</field>
+        <field name="model">subject.subject</field>
+        <field name="arch" type="xml">
+            <form string="subject">
+                <header>
+                    <field name="sub_state" widget="statusbar" statusbar_visible="active,removed,running"
+                           options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" required="True"/>
+                        <field name="mark"/>
+                        <field name="standard_id"/>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="subject_search_view_school" model="ir.ui.view">
+        <field name="name">subject.search.view.school</field>
+        <field name="model">subject.subject</field>
+        <field name="arch" type="xml">
+            <search string="subject">
+                <field name="name"/>
+                <group>
+                    <filter name="state" string="State" context="{'group_by':'sub_state'}"/>
+                </group>
+                <group>
+                    <filter name="mark" string="marks" context="{'group_by':'mark'}"/>
+                </group>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="subject_kanban_view_school" model="ir.ui.view">
+        <field name="name">subject.kanban.view.school</field>
+        <field name="model">subject.subject</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <templates>
+                    <t t-name="card">
+                        <div class="row 0">
+                            <div class="col-6  ">
+                                <strong>name:</strong>
+                            </div>
+                            <div class="col-6  text-end">
+                                <field name="name"/>
+                            </div>
+                            <div class="col-6  ">
+                                <strong>mark:</strong>
+                            </div>
+                            <div class="col-6  text-end">
+                                <field name="mark"/>
+                            </div>
+                            <div class="col-6  ">
+                                <strong>state:</strong>
+                            </div>
+                            <div class="col-6  text-end">
+                                <field name="sub_state"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="action_subject_school" model="ir.actions.act_window">
+        <field name="name">action.subject.school</field>
+        <field name="res_model">subject.subject</field>
+        <field name="view_mode">list,form,search,kanban</field>
+        <field name="view_id" ref="subject_list_view_school"/>
+        <field name="search_view_id" ref="subject_search_view_school"/>
+
+    </record>
+
+
+    <menuitem id="school_Subject_menu" name="Subject" parent="school_main_menu" sequence="3"
+              action="action_subject_school"/>
+
+
+</odoo>

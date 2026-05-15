@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dr_list_view_hospital" model="ir.ui.view">
+        <field name="name">dr.list.view.hospital</field>
+        <field name="model">dr.dr</field>
+        <field name="arch" type="xml">
+            <list string="doctor">
+
+                <field name="name"/>
+
+            </list>
+        </field>
+    </record>
+
+   <record id="dr_form_view_hospital" model="ir.ui.view">
+        <field name="name">dr.form.view.hospital</field>
+        <field name="model">dr.dr</field>
+        <field name="arch" type="xml">
+
+            <form string="doctor">
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+        <record id="dr_search_view_hospital" model="ir.ui.view">
+        <field name="name">dr.search.view.hospital</field>
+        <field name="model">dr.dr</field>
+        <field name="arch" type="xml">
+
+            <search string="doctor">
+                <field name="name" />
+
+
+            </search>
+        </field>
+    </record>
+
+    <record id="dr_kanban_view_hospital" model="ir.ui.view">
+        <field name="name">dr.kanban.view.hospital</field>
+        <field name="model">dr.dr</field>
+        <field name="arch" type="xml">
+
+            <kanban class="o_kanban_mobile">
+                    <templates>
+                        <t t-name="card" >
+                            <div class="row 0">
+                                <div class="col-6  ">
+                                    <strong>Doctor name:</strong>
+                                </div>
+                                <div class="col-6  text-end">
+                                    <field   name="name"/>
+
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+
+    <record id="action_dr_hospital" model="ir.actions.act_window">
+        <field name="name">doctor</field>
+        <field name="res_model">dr.dr</field>
+        <field name="view_mode">list,form,search,kanban</field>
+        <field name="view_id" ref="dr_list_view_hospital"/>
+        <field name="search_view_id" ref="dr_search_view_hospital"/>
+    </record>
+
+
+     <menuitem id="Hospital_main_menu" name="Hospital"/>
+    <menuitem id="doctor_menu" name="doctor" parent="Hospital_main_menu"  sequence="1" action="action_dr_hospital"  />
+
+
+
+</odoo>

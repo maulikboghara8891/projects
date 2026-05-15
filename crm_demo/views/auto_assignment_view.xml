@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="auto_assignment_list_crm_demo" model="ir.ui.view">
+        <field name="name">auto.assignment.list.crm.demo</field>
+        <field name="model">auto.assignment</field>
+        <field name="arch" type="xml">
+            <list >
+                <field name="user_id"/>
+                <field name="min_score"/>
+                <field name="country_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="auto_assignment_form_crm_demo" model="ir.ui.view">
+        <field name="name">auto.assignment.form.crm.demo</field>
+        <field name="model">auto.assignment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="user_id"/>
+                        <field name="min_score" />
+                        <field name="country_id"/>
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="action_auto_assignment" model="ir.actions.act_window">
+        <field name="name">auto assignment</field>
+        <field name="res_model">auto.assignment</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+            id="crm_auto_assign"
+            name="Auto Assignment"
+            parent="crm.crm_menu_config"
+            action="crm_demo.action_auto_assignment"
+            sequence="7"
+    />
+
+</odoo>
