@@ -38,6 +38,9 @@ class SaleOrder(models.Model):
             'target': 'current',
         }
 
+    def action_done(self):
+        return self._create_invoices()
+
     @api.depends('partner_id')
     def _compute_min(self):
         self.minimum = self.partner_id.minimum

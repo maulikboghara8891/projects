@@ -100,5 +100,4 @@ class CrmLead(models.Model):
 class SalesOrder(models.Model):
     _inherit = 'sale.order'
 
-    def action_done(self):
-        return self._create_invoices()
+
