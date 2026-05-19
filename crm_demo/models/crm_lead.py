@@ -5,9 +5,7 @@ from datetime import date, datetime
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
-
     parent_lead_id = fields.Many2one('crm.lead', string="Parent Lead")
-
     # country_id = fields.Many2one('res.country',string='Country')
     @api.onchange('expected_revenue', 'country_id')
     def sales_user_find(self):
@@ -41,11 +39,9 @@ class CrmLead(models.Model):
 
         for lead in leads:
             last_activity = (lead.activity_date_deadline or lead.write_date.date())
-
             day = (today - last_activity).days
             if day >= 15 and day <= 30:
                 print(lead)
-
                 activity = self.env['mail.activity.type'].search([
                     ('name', '=', 'follow-up')
                 ], limit=1)

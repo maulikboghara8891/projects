@@ -1,25 +1,25 @@
-from odoo import models, fields,api
+from odoo import models, fields, api
 
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-
-    currency_id = fields.Many2one('res.currency',compute='_compute_currency_id',string='Currency')
-    handling_charges = fields.Monetary(currency_field='currency_id',string="Handling Charges")
+    currency_id = fields.Many2one('res.currency', compute='_compute_currency_id', string='Currency')
+    handling_charges = fields.Monetary(currency_field='currency_id', string="Handling Charges")
     charges_created = fields.Boolean(string="Charges Created")
+
     # income_account_id = fields.Many2one(related='company_id.income_account_id', readonly=False, check_company=True)
     # expense_account_id = fields.Many2one(related='company_id.expense_account_id', readonly=False, check_company=True)
 
     def _compute_currency_id(self):
-            self.currency_id = self.env.company.currency_id
+        self.currency_id = self.env.company.currency_id
 
     def view_journal_enty(self):
         jrnl = f"{self.name} Handling Charges"
 
         journal = self.env['account.move'].search([
             ('ref', '=', jrnl)
-        ],limit=1)
+        ], limit=1)
         return {
             'type': 'ir.actions.act_window',
             'name': 'Journal Entry',
@@ -30,7 +30,6 @@ class StockPicking(models.Model):
         }
 
     def handling_charges_entry(self):
-
         pickings = self.search([
             ('picking_type_id.code', '=', 'outgoing'),
             ('charges_created', '=', False),
@@ -57,6 +56,7 @@ class StockPicking(models.Model):
                     }),
                 ]
             }
+
 
             journal = self.env['account.move'].create(move_vals)
             journal.action_post()
