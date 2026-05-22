@@ -23,7 +23,6 @@
         "views/sale_order_view.xml",
         "views/project_task_view.xml",
         "views/account_analytic_line.xml"
-        # "views/timesheet_view.xml"
 
     ],
     'installable': True,

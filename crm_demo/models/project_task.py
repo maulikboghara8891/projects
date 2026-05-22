@@ -25,7 +25,7 @@ class ProjectTaksk(models.Model):
         task_ids = self.env['account.analytic.line'].search([
             ('project_id', '=', self.project_id.id), ("related_task_id", "=", self.id)
         ])
-        print(task_ids)
+        # print(task_ids)
         return {
             'type': 'ir.actions.act_window',
             'name': 'Task',
