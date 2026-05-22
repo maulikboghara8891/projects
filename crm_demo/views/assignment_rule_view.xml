@@ -30,10 +30,51 @@
         </field>
     </record>
 
+    <record id="crm_custom_kanban_view" model="ir.ui.view">
+        <field name="name">crm.custom.kanban.view</field>
+        <field name="model">assignment.rule</field>
+        <field name="arch" type="xml">
+            <kanban >
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click o_kanban_record">
+
+                            <div class="o_kanban_record_top">
+                                <strong class="text-primary">
+                                    <field name="assign_role"/>
+                                </strong>
+                            </div>
+
+                            <div class="mt-2" >
+                                <span class="badge bg-info">
+                                    Country:
+                                    <field name="country_id"/>
+                                </span>
+                            </div>
+
+                            <div class="mt-2">
+                                <strong>Revenue:</strong>
+                                $ <field name="revenue_val"/>
+                            </div>
+
+                            <div class="mt-1">
+                                <strong>Score:</strong>
+                                <field name="score"/>
+                            </div>
+
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
     <record id="action_assignment_rule" model="ir.actions.act_window">
         <field name="name">assignment rule</field>
         <field name="res_model">assignment.rule</field>
-        <field name="view_mode">list</field>
+        <field name="view_mode">list,kanban</field>
+<!--        <field name="view_id" ref="crm_custom_kanban_view"/>-->
     </record>
 
     <menuitem
@@ -43,5 +84,14 @@
             action="crm_demo.action_assignment_rule"
             sequence="6"
     />
+    <menuitem
+             id="crm_demo"
+            name="Crm Custom"
+    />
+    <menuitem id="crm_rule"
+              name="Rule"
+              parent="crm_demo"
+              action="crm_demo.action_assignment_rule"/>
+
 
 </odoo>

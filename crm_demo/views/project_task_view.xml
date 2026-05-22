@@ -6,11 +6,26 @@
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project.view_task_form2"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='user_ids']" position="after">
-                <field name="assignee_id"/>
-
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="display_task"/>
             </xpath>
-
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_project_timesheet"
+                        class="oe_stat_button"
+                        type="object"
+                        icon="fa-clock-o">
+                    <div class="o_stat_info">
+                        <div>Times</div>
+                        <span class="o_stat_value">
+                            <field name="total_time_spent"
+                                   widget="float_time"
+                                   nolabel="1"
+                                   class="mr-1"
+                                   string="Times"/>
+                        </span>
+                    </div>
+                </button>
+            </xpath>
         </field>
     </record>
 </odoo>
